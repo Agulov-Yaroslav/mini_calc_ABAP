@@ -1,0 +1,28 @@
+*&---------------------------------------------------------------------*
+*& Report Z_MINI_CALC
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT z_mini_calc.
+PARAMETERS: pa_op1     TYPE i, pa_oper(1), pa_op2 TYPE i.
+DATA: l_result TYPE i.
+
+CASE pa_oper.
+  WHEN '+'.
+    l_result = pa_op1 + pa_op2.
+  WHEN '-'.
+    l_result = pa_op1 - pa_op2.
+  WHEN '*'.
+    l_result = pa_op1 * pa_op2.
+  WHEN '/'.
+    IF pa_op2 = 0.
+      WRITE TEXT-001.
+      EXIT.
+    ELSE.
+      l_result = pa_op1 / pa_op2.
+    ENDIF.
+  WHEN OTHERS.
+    WRITE TEXT-002.
+    EXIT.
+ENDCASE.
+WRITE: l_result.
